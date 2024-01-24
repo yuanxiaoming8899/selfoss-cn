@@ -1,104 +1,74 @@
-# selfoss 2.20-SNAPSHOT
-
-selfoss is a multipurpose RSS reader and feed aggregation web application. It allows you to easily follow updates from different web sites, social networks and other platforms, all in single place. It is written in PHP, allowing you to run it basically anywhere.
-
-For more information visit our [web site](https://selfoss.aditu.de).
-
-## Download
-
-* [Stable releases](https://github.com/fossar/selfoss/releases) – if you just want to use selfoss.
-* [Development builds](https://cloudsmith.io/~fossar/repos/selfoss-git/packages/) ([latest](https://cloudsmith.io/~fossar/repos/selfoss-git/packages/?q=version%3Alatest)) – if you want to try unreleased features or bug fixes, or help testing them. Hosted by [Cloudsmith](https://cloudsmith.com)
-* [Git-tracked source code](https://github.com/fossar/selfoss) – if you want to join selfoss development. Some [assembly](#development) required.
-
-
-## Installation
-
-1. Upload all files of this directory (IMPORTANT: also upload the invisible `.htaccess` files).
-2. Make the directories `data/cache`, `data/favicons`, `data/logs`, `data/thumbnails` and `data/sqlite` writeable.
-3. Insert database access data in `config.ini` (see below). You do not need to change anything if you want to use SQLite.
-4. You do not need to create the database tables, they will be created automatically (ensure that your database user is allowed to create triggers).
-5. Create cronjob or systemd timer for updating feeds and point it to https://yourselfossurl.com/update via wget or curl. You can also execute the `cliupdate.php` from command line.
-
-If you obtained selfoss using Git, some more steps will be required. See the [development](#development) section.
-
-For further questions or on any problem use our support forum: https://forum.selfoss.aditu.de/
-
-
-## Configuration
-
-No configuration is needed to use selfoss but you can customize the settings as follows:
-
-1. Rename `config-example.ini` to `config.ini`.
-2. Edit `config.ini` and delete any lines you do not wish to override.
-3. See <https://selfoss.aditu.de/> for examples.
-
-
-## Update
-
-1. Backup your database and your `data/` directory.
-2. (IMPORTANT: do NOT delete the `data/` directory) delete all old files and directories excluding the directory `data/` and the file `config.ini`
-3. Upload all new files and directories excluding the `data/` directory (IMPORTANT: also upload the invisible `.htaccess` files).
-4. Consult the [NEWS file](NEWS.md) to learn about backwards incompatible changes.
-5. Clean your browser cache.
-6. Insert your current database connection and your individual configuration in `config.ini`. Important: we change the `config.ini` and add new options in newer versions. You have to update the `config.ini` too.
-7. The database will be updated automatically (ensure that your database user is allowed to create triggers).
-
-If you obtained selfoss using Git, some more steps might be required. See the [development](#development) section.
-
-For further questions or on any problem use our support forum: https://selfoss.aditu.de/forum
-
-
-## Support
-
-* [Issue tracker](https://github.com/fossar/selfoss/issues) for reporting problems and requesting new features
-* [Forum](https://forum.selfoss.aditu.de/) for general questions about usage
-* [Chat on Gitter](https://gitter.im/fossar/selfoss) (or [`#selfoss:matrix.org` mirror](https://matrix.to/#/#selfoss:matrix.org)) for discussing selfoss development or just about anything
-
-
-## OPML import
-
-Selfoss supports importing OPML files. Find the OPML export in the old application, it is usually located somewhere in settings. Then visit the page https://yourselfossurl.com/opml and upload it there.
-
-
-## Third-party Apps
-
-We recommend [Reader For Selfoss](https://f-droid.org/packages/bou.amine.apps.readerforselfossv2.android) for Android devices.
-
-
-## Development
-
-Selfoss uses [composer](https://getcomposer.org/) and [npm](https://www.npmjs.com/get-npm) for installing external libraries. When you clone the repository you have to issue `composer install` to retrieve the external sources.
-
-For the client side, you will also need JavaScript dependencies installed by calling `npm install` in the `client/` directory. You can use `npm run install-dependencies` as a shortcut for installing both sets of dependencies.
-
-We use [Parcel](https://parceljs.org/) (installed by the command above) to build the client side of selfoss. Every time anything in `client/` directory changes, you will need to run `npm run build` for the client to be built and installed into the `public` directory. When developing, you can also use `npm run dev`; it will watch for asset changes, rebuild the bundles as needed, and reload selfoss automatically. Upon switching between `npm run dev` and `npm run build`, you may need to delete `client/.cache`.
-
-If you want to create a package with all the dependencies bundled, you can run `npm run dist` command to produce a zipball.
-
-Every patch is expected to adhere to our coding style, which is checked automatically by CI. You can install the checkers locally using `npm run install-dependencies`, and then run the checks using `npm run check` before submitting a pull request. There is also `npm run fix`, that will attempt to fix the formatting.
-
-## Credits
-
-selfoss was created by [Tobias Zeising](tobias.zeising@aditu.de), and the source code is licensed under the GNU General Public licence version 3, or (at your option) any later version.
-
-Some parts of the source code can be licensed under version 3 only, we are [currently trying to resolve it](https://github.com/fossar/selfoss/issues/1218).
-
-The package with bundled dependencies might be distributed under version 3 only.
-
-Very special thanks to all contributors of pull requests here on [GitHub](https://github.com/fossar/selfoss), as well as translators on [Weblate](https://hosted.weblate.org/projects/selfoss/translations/). Your improvements are awesome!
-
-Special thanks to the great programmers of these libraries used by selfoss:
-
-* [FatFree PHP Framework](https://fatfreeframework.com/)
-* [SimplePie](http://simplepie.org/)
-* [WideImage](http://wideimage.sourceforge.net/)
-* [htmLawed](http://www.bioinformatics.org/phplabware/internal_utilities/htmLawed/)
-* [PHP Universal Feed Generator](https://github.com/ajaxray/FeedWriter)
-* [Elphin IcoFileLoader](https://github.com/lordelph/icofileloader)
-* [Graby](https://github.com/j0k3r/graby)
-* [FullTextRSS filters](http://help.fivefilters.org/customer/portal/articles/223153-site-patterns)
-* [yet-another-react-lightbox](https://github.com/igordanchenko/yet-another-react-lightbox)
-
-Icon made by http://blackbooze.com/
-
-Package repository hosting is graciously provided by [Cloudsmith](https://cloudsmith.com). Cloudsmith is the only fully hosted, cloud-native, universal package management solution, that enables your organization to create, store and share packages in any format, to any place, with total confidence.
+<div class="Box-sc-g0xbh4-0 bJMeLZ js-snippet-clipboard-copy-unpositioned" data-hpc="true"><article class="markdown-body entry-content container-lg" itemprop="text"><h1 tabindex="-1" dir="auto"><a id="user-content-selfoss-220-snapshot" class="anchor" aria-hidden="true" tabindex="-1" href="#selfoss-220-snapshot"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">selfoss 2.20-快照</font></font></h1>
+<p dir="auto"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">selfoss 是一个多用途 RSS 阅读器和提要聚合 Web 应用程序。</font><font style="vertical-align: inherit;">它使您可以轻松地跟踪来自不同网站、社交网络和其他平台的更新，所有这些都在一个地方。</font><font style="vertical-align: inherit;">它是用 PHP 编写的，允许您基本上在任何地方运行它。</font></font></p>
+<p dir="auto"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">如果你想知道更多的信息，请访问我们的</font></font><a href="https://selfoss.aditu.de" rel="nofollow"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">网站</font></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">。</font></font></p>
+<h2 tabindex="-1" dir="auto"><a id="user-content-download" class="anchor" aria-hidden="true" tabindex="-1" href="#download"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">下载</font></font></h2>
+<ul dir="auto">
+<li><a href="https://github.com/fossar/selfoss/releases"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">稳定版本</font></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">– 如果您只想使用 selfoss。</font></font></li>
+<li><a href="https://cloudsmith.io/~fossar/repos/selfoss-git/packages/" rel="nofollow"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">开发版本</font></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">（</font></font><a href="https://cloudsmith.io/~fossar/repos/selfoss-git/packages/?q=version%3Alatest" rel="nofollow"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">最新</font></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">） - 如果您想尝试未发布的功能或错误修复，或帮助测试它们。</font><a href="https://cloudsmith.com" rel="nofollow"><font style="vertical-align: inherit;">云匠</font></a><font style="vertical-align: inherit;">主持</font></font><a href="https://cloudsmith.com" rel="nofollow"><font style="vertical-align: inherit;"></font></a></li>
+<li><a href="https://github.com/fossar/selfoss"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Git 跟踪的源代码</font></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">– 如果您想加入 selfoss 开发。</font><font style="vertical-align: inherit;">需要</font><font style="vertical-align: inherit;">一些</font></font><a href="#development"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">组装。</font></font></a><font style="vertical-align: inherit;"></font></li>
+</ul>
+<h2 tabindex="-1" dir="auto"><a id="user-content-installation" class="anchor" aria-hidden="true" tabindex="-1" href="#installation"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">安装</font></font></h2>
+<ol dir="auto">
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">上传该目录的所有文件（重要：还要上传不可见的</font></font><code>.htaccess</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">文件）。</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">使目录</font></font><code>data/cache</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">、</font></font><code>data/favicons</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">、</font></font><code>data/logs</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">和</font></font><code>data/thumbnails</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">可</font></font><code>data/sqlite</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">写。</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">将数据库访问数据插入</font></font><code>config.ini</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">（见下文）。</font><font style="vertical-align: inherit;">如果您想使用 SQLite，则无需更改任何内容。</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">您不需要创建数据库表，它们将自动创建（确保您的数据库用户有权创建触发器）。</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">创建 cronjob 或 systemd 计时器来更新 feed，并通过 wget 或 curl 将其指向</font></font><a href="https://yourselfossurl.com/update" rel="nofollow"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">https://yourselfossurl.com/update</font></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">。</font><font style="vertical-align: inherit;">您还可以执行</font></font><code>cliupdate.php</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">from 命令行。</font></font></li>
+</ol>
+<p dir="auto"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">如果您使用 Git 获取 selfoss，则需要执行更多步骤。</font><font style="vertical-align: inherit;">请参阅</font></font><a href="#development"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">开发</font></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">部分。</font></font></p>
+<p dir="auto"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">如有更多疑问或任何问题，请使用我们的支持论坛： https: </font></font><a href="https://forum.selfoss.aditu.de/" rel="nofollow"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">//forum.selfoss.aditu.de/</font></font></a></p>
+<h2 tabindex="-1" dir="auto"><a id="user-content-configuration" class="anchor" aria-hidden="true" tabindex="-1" href="#configuration"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">配置</font></font></h2>
+<p dir="auto"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">使用 selfoss 无需配置，但您可以自定义设置，如下所示：</font></font></p>
+<ol dir="auto">
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">重命名</font></font><code>config-example.ini</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">为</font></font><code>config.ini</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">.</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">编辑</font></font><code>config.ini</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">并删除您不希望覆盖的任何行。</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">有关示例，</font><font style="vertical-align: inherit;">请参阅</font></font><a href="https://selfoss.aditu.de/" rel="nofollow"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">https://selfoss.aditu.de/ 。</font></font></a><font style="vertical-align: inherit;"></font></li>
+</ol>
+<h2 tabindex="-1" dir="auto"><a id="user-content-update" class="anchor" aria-hidden="true" tabindex="-1" href="#update"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">更新</font></font></h2>
+<ol dir="auto">
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">备份您的数据库和</font></font><code>data/</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">目录。</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">（重要：不要删除</font></font><code>data/</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">目录）删除除目录和文件之外的所有旧文件和</font></font><code>data/</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">目录</font></font><code>config.ini</code></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">上传除目录之外的所有新文件和目录</font></font><code>data/</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">（重要：还要上传不可见</font></font><code>.htaccess</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">文件）。</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">请查阅</font></font><a href="/fossar/selfoss/blob/master/NEWS.md"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">新闻文件</font></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">以了解向后不兼容的更改。</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">清理浏览器缓存。</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">将您当前的数据库连接和您的个人配置插入到</font></font><code>config.ini</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">. </font><font style="vertical-align: inherit;">重要提示：我们在新版本中更改</font></font><code>config.ini</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">并添加新选项。</font><font style="vertical-align: inherit;">你也必须更新</font></font><code>config.ini</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">。</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">数据库将自动更新（确保您的数据库用户有权创建触发器）。</font></font></li>
+</ol>
+<p dir="auto"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">如果您使用 Git 获取 selfoss，则可能需要执行更多步骤。</font><font style="vertical-align: inherit;">请参阅</font></font><a href="#development"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">开发</font></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">部分。</font></font></p>
+<p dir="auto"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">如有更多疑问或任何问题，请使用我们的支持论坛： https: </font></font><a href="https://selfoss.aditu.de/forum" rel="nofollow"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">//selfoss.aditu.de/forum</font></font></a></p>
+<h2 tabindex="-1" dir="auto"><a id="user-content-support" class="anchor" aria-hidden="true" tabindex="-1" href="#support"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">支持</font></font></h2>
+<ul dir="auto">
+<li><a href="https://github.com/fossar/selfoss/issues"><font style="vertical-align: inherit;"></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">用于报告问题和请求新功能的</font><a href="https://github.com/fossar/selfoss/issues"><font style="vertical-align: inherit;">问题跟踪器</font></a></font></li>
+<li><a href="https://forum.selfoss.aditu.de/" rel="nofollow"><font style="vertical-align: inherit;"></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">有关使用的一般问题的</font><a href="https://forum.selfoss.aditu.de/" rel="nofollow"><font style="vertical-align: inherit;">论坛</font></a></font></li>
+<li><a href="https://gitter.im/fossar/selfoss" rel="nofollow"><font style="vertical-align: inherit;"></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">在 Gitter （或</font></font><a href="https://matrix.to/#/#selfoss:matrix.org" rel="nofollow"><code>#selfoss:matrix.org</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">mirror ）</font></font></a><font style="vertical-align: inherit;"><a href="https://gitter.im/fossar/selfoss" rel="nofollow"><font style="vertical-align: inherit;">上聊天</font></a><font style="vertical-align: inherit;">，讨论 selfoss 开发或任何事情</font></font></li>
+</ul>
+<h2 tabindex="-1" dir="auto"><a id="user-content-opml-import" class="anchor" aria-hidden="true" tabindex="-1" href="#opml-import"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">OPML导入</font></font></h2>
+<p dir="auto"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Selfoss 支持导入 OPML 文件。</font><font style="vertical-align: inherit;">在旧应用程序中找到 OPML 导出，它通常位于设置中的某个位置。</font><font style="vertical-align: inherit;">然后访问页面</font></font><a href="https://yourselfossurl.com/opml" rel="nofollow"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">https://yourselfossurl.com/opml</font></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">并将其上传到那里。</font></font></p>
+<h2 tabindex="-1" dir="auto"><a id="user-content-third-party-apps" class="anchor" aria-hidden="true" tabindex="-1" href="#third-party-apps"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">第三方应用程序</font></font></h2>
+<p dir="auto"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">我们推荐</font><font style="vertical-align: inherit;">适用于 Android 设备的</font></font><a href="https://f-droid.org/packages/bou.amine.apps.readerforselfossv2.android" rel="nofollow"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Reader For Selfoss 。</font></font></a><font style="vertical-align: inherit;"></font></p>
+<h2 tabindex="-1" dir="auto"><a id="user-content-development" class="anchor" aria-hidden="true" tabindex="-1" href="#development"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">发展</font></font></h2>
+<p dir="auto"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Selfoss 使用</font></font><a href="https://getcomposer.org/" rel="nofollow"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Composer</font></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">和</font></font><a href="https://www.npmjs.com/get-npm" rel="nofollow"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">npm</font></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">来安装外部库。</font><font style="vertical-align: inherit;">当您克隆存储库时，您必须发出命令</font></font><code>composer install</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">来检索外部源。</font></font></p>
+<p dir="auto"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">对于客户端，您还需要通过调用目录来安装 JavaScript 依赖</font></font><code>npm install</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">项</font></font><code>client/</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">。</font><font style="vertical-align: inherit;">您可以将其用作</font></font><code>npm run install-dependencies</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">安装两组依赖项的快捷方式。</font></font></p>
+<p dir="auto"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">我们使用</font></font><a href="https://parceljs.org/" rel="nofollow"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Parcel</font></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">（通过上面的命令安装）来构建 selfoss 的客户端。</font><font style="vertical-align: inherit;">每次</font></font><code>client/</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">目录中的任何内容发生更改时，您都需要运行</font></font><code>npm run build</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">客户端来构建并安装到该</font></font><code>public</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">目录中。</font><font style="vertical-align: inherit;">开发时还可以使用</font></font><code>npm run dev</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">；</font><font style="vertical-align: inherit;">它将监视资产更改，根据需要重建捆绑包，并自动重新加载 selfoss。</font></font><code>npm run dev</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">在和</font><font style="vertical-align: inherit;">之间切换时</font></font><code>npm run build</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">，您可能需要删除</font></font><code>client/.cache</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">.</font></font></p>
+<p dir="auto"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">如果您想创建一个捆绑所有依赖项的包，您可以运行</font></font><code>npm run dist</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">命令来生成 zipball。</font></font></p>
+<p dir="auto"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">每个补丁都应该遵循我们的编码风格，由 CI 自动检查。</font><font style="vertical-align: inherit;">您可以使用 在本地安装检查器</font></font><code>npm run install-dependencies</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">，然后</font></font><code>npm run check</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">在提交拉取请求之前使用运行检查。</font><font style="vertical-align: inherit;">还有</font></font><code>npm run fix</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">，它将尝试修复格式。</font></font></p>
+<h2 tabindex="-1" dir="auto"><a id="user-content-credits" class="anchor" aria-hidden="true" tabindex="-1" href="#credits"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">制作人员</font></font></h2>
+<p dir="auto"><font style="vertical-align: inherit;"></font><a href="/fossar/selfoss/blob/master/tobias.zeising@aditu.de"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">selfoss 由Tobias Zeising</font></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">创建</font><font style="vertical-align: inherit;">，源代码根据 GNU 通用公共许可证版本 3 或（由您选择）任何更高版本获得许可。</font></font></p>
+<p dir="auto"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">源代码的某些部分只能在版本 3 下获得许可，我们</font></font><a href="https://github.com/fossar/selfoss/issues/1218" data-hovercard-type="issue" data-hovercard-url="/fossar/selfoss/issues/1218/hovercard"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">目前正在尝试解决该问题</font></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">。</font></font></p>
+<p dir="auto"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">具有捆绑依赖项的包可能仅在版本 3 下分发。</font></font></p>
+<p dir="auto"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">非常特别感谢</font></font><a href="https://github.com/fossar/selfoss"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">GitHub</font></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">上拉取请求的所有贡献者以及</font></font><a href="https://hosted.weblate.org/projects/selfoss/translations/" rel="nofollow"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Weblate</font></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">上的翻译者。</font><font style="vertical-align: inherit;">你的进步太棒了！</font></font></p>
+<p dir="auto"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">特别感谢 selfoss 使用的这些库的伟大程序员：</font></font></p>
+<ul dir="auto">
+<li><a href="https://fatfreeframework.com/" rel="nofollow"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">FatFree PHP 框架</font></font></a></li>
+<li><a href="http://simplepie.org/" rel="nofollow"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">简单饼图</font></font></a></li>
+<li><a href="http://wideimage.sourceforge.net/" rel="nofollow"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">宽图像</font></font></a></li>
+<li><a href="http://www.bioinformatics.org/phplabware/internal_utilities/htmLawed/" rel="nofollow"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">html法律</font></font></a></li>
+<li><a href="https://github.com/ajaxray/FeedWriter"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">PHP 通用提要生成器</font></font></a></li>
+<li><a href="https://github.com/lordelph/icofileloader"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Elphin IcoFileLoader</font></font></a></li>
+<li><a href="https://github.com/j0k3r/graby"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">格雷比</font></font></a></li>
+<li><a href="http://help.fivefilters.org/customer/portal/articles/223153-site-patterns" rel="nofollow"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">全文RSS 过滤器</font></font></a></li>
+<li><a href="https://github.com/igordanchenko/yet-another-react-lightbox"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">另一个反应灯箱</font></font></a></li>
+</ul>
+<p dir="auto"><font style="vertical-align: inherit;"><a href="http://blackbooze.com/" rel="nofollow"><font style="vertical-align: inherit;">图标由http://blackbooze.com/</font></a><font style="vertical-align: inherit;">制作</font></font><a href="http://blackbooze.com/" rel="nofollow"><font style="vertical-align: inherit;"></font></a></p>
+<p dir="auto"><font style="vertical-align: inherit;"></font><a href="https://cloudsmith.com" rel="nofollow"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Cloudsmith</font></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">慷慨地提供了包存储库托管</font><font style="vertical-align: inherit;">。</font><font style="vertical-align: inherit;">Cloudsmith 是唯一完全托管、云原生、通用包管理解决方案，使您的组织能够完全放心地在任何地方以任何格式创建、存储和共享包。</font></font></p>
+</article></div>
